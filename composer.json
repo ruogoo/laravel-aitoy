@@ -1,0 +1,24 @@
+{
+    "name": "ruogoo/laravel-aitoy",
+    "type": "library",
+    "license": "Apache License 2.0",
+    "authors": [{
+        "name": "HyanCat",
+        "email": "hyancat@live.cn"
+    }],
+    "require": {
+        "php": ">=7.0",
+        "illuminate/support": "^5.4",
+        "kitetail/zttp": "^0.3.0"
+    },
+    "psr-4": {
+        "Ruogoo\\AIToy\\": "src/"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ruogoo\\AIToy\\AIToyServiceProvider"
+            ]
+        }
+    }
+}
