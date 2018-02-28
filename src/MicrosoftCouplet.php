@@ -29,10 +29,10 @@ class MicrosoftCouplet
     {
         $json     = Zttp::asJson()->post(self::URL_COUPLET, [
             'shanglian'     => $str,
-            'xialianLocker' => '00000',
+            'xialianLocker' => str_repeat('0', mb_strlen($str)),
             'isUpdate'      => false,
         ])->json();
-        $wellSets = array_get($json, 'd.XialianWellKnownSets');
+        $wellSets = array_get($json, 'd.XialianWellKnownSets', array_get($json, 'd.XialianSystemGeneratedSets'));
         if (\is_array($wellSets)) {
             return array_flatten(array_pluck($wellSets, 'XialianCandidates'));
         }
