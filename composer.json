@@ -11,8 +11,10 @@
         "illuminate/support": "^5.4",
         "kitetail/zttp": "^0.3.0"
     },
-    "psr-4": {
-        "Ruogoo\\AIToy\\": "src/"
+    "autoload": {
+        "psr-4": {
+            "Ruogoo\\AIToy\\": "src/"
+        }
     },
     "extra": {
         "laravel": {
@@ -20,5 +22,11 @@
                 "Ruogoo\\AIToy\\AIToyServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }
