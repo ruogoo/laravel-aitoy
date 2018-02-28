@@ -20,7 +20,10 @@
         "laravel": {
             "providers": [
                 "Ruogoo\\AIToy\\AIToyServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "AICouplet": "Ruogoo\\AIToy\\AICoupletFacade"
+            }
         }
     },
     "require-dev": {
