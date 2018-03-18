@@ -9,7 +9,7 @@
 
 namespace Ruogoo\AIToy;
 
-use Zttp\Zttp;
+use GuzzleHttp\Client;
 
 class MicrosoftCouplet
 {
@@ -18,25 +18,36 @@ class MicrosoftCouplet
 
     public function isValid($str): bool
     {
-        $json = Zttp::asJson()->post(self::URL_VALID, [
-            'inputString' => $str,
-        ])->json();
+        $json = $this->request(self::URL_VALID, ['inputString' => $str]);
 
         return array_get($json, 'd', false);
     }
 
     public function couplet($str): array
     {
-        $json     = Zttp::asJson()->post(self::URL_COUPLET, [
+        $json = $this->request(self::URL_COUPLET, [
             'shanglian'     => $str,
             'xialianLocker' => str_repeat('0', mb_strlen($str)),
             'isUpdate'      => false,
-        ])->json();
+        ]);
+
         $wellSets = array_get($json, 'd.XialianWellKnownSets', array_get($json, 'd.XialianSystemGeneratedSets'));
         if (\is_array($wellSets)) {
             return array_flatten(array_pluck($wellSets, 'XialianCandidates'));
         }
 
         return [];
+    }
+
+    private function request(string $url, array $params): array
+    {
+        $client          = new Client();
+        $responseContent = $client->post(url, [
+            'form_params' => $params,
+        ])->getBody()->getContents();
+
+        $json = json_decode($responseContent, true);
+
+        return $json;
     }
 }
