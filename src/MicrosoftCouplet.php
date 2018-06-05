@@ -13,7 +13,7 @@ use GuzzleHttp\Client;
 
 class MicrosoftCouplet
 {
-    const URL_VALID = 'http://duilian.msra.cn/app/CoupletsWS_V2.asmx/IsValidChineseString';
+    const URL_VALID   = 'http://duilian.msra.cn/app/CoupletsWS_V2.asmx/IsValidChineseString';
     const URL_COUPLET = 'http://duilian.msra.cn/app/CoupletsWS_V2.asmx/GetXiaLian';
 
     public function isValid($str): bool
@@ -39,11 +39,14 @@ class MicrosoftCouplet
         return [];
     }
 
-    private function request(string $url, array $params): array
+    private function request(string $url, array $params): ?array
     {
         $client          = new Client();
-        $responseContent = $client->post(url, [
-            'form_params' => $params,
+        $responseContent = $client->post($url, [
+            'body'    => json_encode($params),
+            'headers' => [
+                'Content-Type' => 'application/json; charset=UTF-8',
+            ],
         ])->getBody()->getContents();
 
         $json = json_decode($responseContent, true);
