@@ -2,13 +2,15 @@
     "name": "ruogoo/laravel-aitoy",
     "type": "library",
     "license": "Apache-2.0",
-    "authors": [{
-        "name": "HyanCat",
-        "email": "hyancat@live.cn"
-    }],
+    "authors": [
+        {
+            "name": "HyanCat",
+            "email": "hyancat@live.cn"
+        }
+    ],
     "require": {
         "php": ">=7.0",
-        "illuminate/support": "^5.4|^6.0|^7.0",
+        "illuminate/support": "^5.4|^6.0|^7.0|^8.0",
         "guzzlehttp/guzzle": "^6.3"
     },
     "autoload": {
